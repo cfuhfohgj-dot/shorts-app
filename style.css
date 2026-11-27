@@ -32,4 +32,38 @@ html,body{margin:0;height:100%;background:#000;color:#fff;font-family:system-ui,
 .plus i{font-style:normal;font-size:26px;font-weight:700;color:#000;background:#fff;width:44px;height:30px;border-radius:9px;display:grid;place-items:center;box-shadow:-3px 0 0 #25f4ee,3px 0 0 #fe2c55;line-height:1}
 .toast{position:fixed;left:50%;bottom:130px;transform:translateX(-50%) translateY(20px);background:#222;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;opacity:0;transition:.25s;z-index:30;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%)}
-@media(min-width:700px){.card video{object-fit:contain}.feed{inset-inline:calc(50% - 240px)}.top,.bottom{inset-inline:calc(50% - 240px)}}
+.panel{position:fixed;inset:0 0 calc(env(safe-area-inset-bottom) + 62px) 0;z-index:9;background:#0b0b0b;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 14px) 16px 20px}
+.panel[hidden],.cam[hidden]{display:none}
+.ptitle{text-align:center;font-weight:700;font-size:17px;margin-bottom:14px}
+.q{width:100%;background:#1c1c1e;border:1px solid #333;border-radius:12px;color:#fff;padding:12px 14px;font-size:16px;font-family:inherit;outline:0}
+.plist{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.res,.nt{display:flex;gap:12px;align-items:center;padding:10px;border-radius:12px;background:#151517;cursor:pointer;border:0;color:#fff;text-align:start;font-family:inherit;width:100%}
+.res .avatar{width:40px;height:40px;font-size:17px;margin:0;flex:none}
+.res p,.nt p{margin:0;font-size:14px;line-height:1.5;display:flex;flex-direction:column}
+.res small,.nt small{color:#999;font-size:12px}
+.nt{cursor:default}.nt i{font-style:normal;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none}
+.none{text-align:center;color:#999;padding:30px 0}
+.me{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:16px}
+.me .avatar{width:72px;height:72px;font-size:30px}.me small{color:#999}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.grid button{position:relative;aspect-ratio:9/16;background:#222;border:0;padding:0;overflow:hidden;cursor:pointer}
+.grid video{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.empty{text-align:center;color:#999;line-height:2;padding:40px 0}
+.cam{position:fixed;inset:0;z-index:40;background:#000}
+.cam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cam video.mirror{transform:scaleX(-1)}
+.cbtn{position:absolute;top:calc(env(safe-area-inset-top) + 14px);width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:20px;display:grid;place-items:center;z-index:3;cursor:pointer}
+.cbtn svg{width:24px;height:24px;fill:#fff}
+.cx{inset-inline-end:14px}.cf{inset-inline-start:14px}
+.rectime{position:absolute;top:calc(env(safe-area-inset-top) + 22px);left:50%;transform:translateX(-50%);background:#fe2c55;padding:4px 12px;border-radius:14px;font-size:14px;font-weight:700;z-index:3}
+.camfoot{position:absolute;bottom:0;inset-inline:0;padding:20px 20px calc(env(safe-area-inset-bottom) + 26px);display:flex;flex-direction:column;align-items:center;gap:16px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);z-index:3}
+.capt{width:100%;max-width:420px;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:22px;color:#fff;padding:10px 16px;font-size:15px;font-family:inherit;outline:0;text-align:center}
+.rec{width:76px;height:76px;border-radius:50%;border:4px solid #fff;background:none;display:grid;place-items:center;cursor:pointer;padding:0}
+.rec i{width:56px;height:56px;border-radius:50%;background:#fe2c55;transition:.2s}
+.rec.on i{width:30px;height:30px;border-radius:7px}
+.camerr{position:absolute;inset:0;background:#0b0b0b;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:30px;text-align:center;line-height:1.8}
+.camerr[hidden]{display:none}
+.btn{background:#fff;color:#000;border:0;border-radius:22px;padding:10px 28px;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer}
+@media(min-width:700px){.card video{object-fit:contain}.feed{inset-inline:calc(50% - 240px)}.top,.bottom{inset-inline:calc(50% - 240px)}.panel{inset-inline:calc(50% - 240px)}.cam{inset-inline:calc(50% - 240px)}}
+body.pan .top{display:none}
+.nav.active svg,.nav.active span{filter:drop-shadow(0 0 4px rgba(255,255,255,.5))}
