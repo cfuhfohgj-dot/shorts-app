@@ -15,12 +15,43 @@
 </header>
 <main id="feed" class="feed"></main>
 <nav class="bottom">
-  <button class="nav active"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg><span>الرئيسية</span></button>
-  <button class="nav"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><span>بحث</span></button>
-  <button class="nav plus" aria-label="جديد"><i>+</i></button>
-  <button class="nav"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5-6.7V3a2 2 0 0 0-4 0v1.3A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg><span>الإشعارات</span></button>
-  <button class="nav"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-8 2-8 5v3h16v-3c0-3-4-5-8-5z"/></svg><span>بروفايل</span></button>
+  <button data-nav="home" class="nav active"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg><span>الرئيسية</span></button>
+  <button data-nav="search" class="nav"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><span>بحث</span></button>
+  <button data-nav="plus" class="nav plus" aria-label="جديد"><i>+</i></button>
+  <button data-nav="notif" class="nav"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5-6.7V3a2 2 0 0 0-4 0v1.3A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg><span>الإشعارات</span></button>
+  <button data-nav="profile" class="nav"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-8 2-8 5v3h16v-3c0-3-4-5-8-5z"/></svg><span>بروفايل</span></button>
 </nav>
+<section id="p-search" class="panel" hidden>
+  <div class="ptitle">بحث</div>
+  <input id="q" class="q" type="search" placeholder="ابحث باسم المستخدم أو الوصف" autocomplete="off">
+  <div id="results" class="plist"></div>
+</section>
+<section id="p-notif" class="panel" hidden>
+  <div class="ptitle">الإشعارات</div>
+  <div class="plist">
+   <div class="nt"><i style="background:#fe2c55">♥</i><p><b>@نور_الصحراء</b> أعجبه فيديوك<small>منذ ٥ دقائق</small></p></div>
+   <div class="nt"><i style="background:#3a86ff">👤</i><p><b>@بحر_وأمواج</b> بدأ بمتابعتك<small>منذ ساعة</small></p></div>
+   <div class="nt"><i style="background:#06d6a0">💬</i><p><b>@زهرة_القاهرة</b> علّق: تصوير جميل 👏<small>منذ ٣ ساعات</small></p></div>
+   <div class="nt"><i style="background:#8338ec">★</i><p><b>شورتس</b> أهلاً بك! صوّر أول فيديو من زر +<small>أمس</small></p></div>
+  </div>
+</section>
+<section id="p-profile" class="panel" hidden>
+  <div class="ptitle">بروفايل</div>
+  <div class="me"><div class="avatar" style="background:#fe2c55">أ</div><b>@أنت</b><small id="mecount">٠ فيديو</small></div>
+  <div id="grid" class="grid"></div>
+  <div id="empty" class="empty">لسه ما صورتش أي فيديو 🎬<br>دوس على زر + وابدأ التصوير</div>
+</section>
+<section id="cam" class="cam" hidden>
+  <video id="camv" autoplay muted playsinline></video>
+  <div id="camerr" class="camerr" hidden><p id="camerrt"></p><button id="camok" class="btn">رجوع</button></div>
+  <button id="camx" class="cbtn cx" aria-label="إغلاق">✕</button>
+  <button id="camflip" class="cbtn cf" aria-label="قلب الكاميرا"><svg viewBox="0 0 24 24"><path d="M12 5V2L8 6l4 4V7a5 5 0 0 1 4.6 7h2.1A7 7 0 0 0 12 5zm-4.6 5H5.3A7 7 0 0 0 12 19v3l4-4-4-4v3a5 5 0 0 1-4.6-7z"/></svg></button>
+  <div id="rectime" class="rectime" hidden>0:00</div>
+  <div class="camfoot">
+   <input id="capt" class="capt" placeholder="اكتب وصفًا للفيديو (اختياري)" maxlength="120">
+   <button id="rec" class="rec" aria-label="تسجيل"><i></i></button>
+  </div>
+</section>
 <div id="toast" class="toast"></div>
 <script src="app.js"></script>
 </body>
