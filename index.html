@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#000000">
+<title>شورتس</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <button class="tab" data-tab="following">متابَع</button>
+  <span class="sep">|</span>
+  <button class="tab active" data-tab="foryou">لك</button>
+</header>
+<main id="feed" class="feed"></main>
+<nav class="bottom">
+  <button class="nav active"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg><span>الرئيسية</span></button>
+  <button class="nav"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><span>بحث</span></button>
+  <button class="nav plus" aria-label="جديد"><i>+</i></button>
+  <button class="nav"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5-6.7V3a2 2 0 0 0-4 0v1.3A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg><span>الإشعارات</span></button>
+  <button class="nav"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-8 2-8 5v3h16v-3c0-3-4-5-8-5z"/></svg><span>بروفايل</span></button>
+</nav>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
