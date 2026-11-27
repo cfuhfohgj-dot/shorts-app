@@ -139,3 +139,4 @@ body.pan .top{display:none}
 .shc{display:block;margin:6px auto 0}
 .shrow{display:flex;gap:10px;justify-content:center;margin-top:12px}
 .yterr{color:#ff8fa3;font-size:13.5px;line-height:1.7;margin:10px 2px 0;min-height:4px}
+.info b,.res b,#uh,#meh{unicode-bidi:plaintext}
