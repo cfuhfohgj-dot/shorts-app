@@ -1,3 +1,6 @@
+const ICO={"heart": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"/></svg>", "chat": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/></svg>", "send": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m22 2-7 20-4-9-9-4Z\"/><path d=\"M22 2 11 13\"/></svg>", "save": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z\"/></svg>", "volon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 5 6 9H2v6h4l5 4z\"/><path d=\"M15.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 5a10 10 0 0 1 0 14\"/></svg>", "voloff": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 5 6 9H2v6h4l5 4z\"/><path d=\"m22 9-6 6\"/><path d=\"m16 9 6 6\"/></svg>", "home": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><path d=\"M9 22V12h6v10\"/></svg>", "search": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg>", "bell": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\"/><path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\"/></svg>", "user": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>", "plus": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg>", "video": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11\"/><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\"/></svg>", "yt": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17\"/><path d=\"m10 15 5-3-5-3z\"/></svg>", "x": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18M6 6l12 12\"/></svg>", "back": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 18 6-6-6-6\"/></svg>", "flip": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8\"/><path d=\"M21 3v5h-5\"/><path d=\"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16\"/><path d=\"M8 16H3v5\"/></svg>", "spark": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z\"/></svg>", "play": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 4.5v15l13-7.5z\" fill=\"currentColor\"/></svg>"};
+const paintIcons=r=>(r||document).querySelectorAll("[data-i]").forEach(e=>{if(!e.firstChild)e.innerHTML=ICO[e.dataset.i]||""});
+const savedSet=new Set((()=>{try{return JSON.parse(localStorage.getItem("shorts_saved")||"[]")}catch(e){return[]}})());
 const SAMPLES=[
  {src:"https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",user:"@نور_الصحراء",caption:"أرنوب كسلان في الصباح 🐰☀️ مين زيه يوم الجمعة؟ #كسل",likes:12400,comments:342,c:"#e8a33d"},
  {src:"https://test-videos.co.uk/vids/jellyfish/mp4/h264/360/Jellyfish_360_10s_1MB.mp4",user:"@بحر_وأمواج",caption:"قناديل البحر بترقص في الأزرق الهادي 🌊✨ #طبيعة",likes:8900,comments:211,c:"#2ec4b6"},
@@ -9,14 +12,7 @@ const SAMPLES=[
  {src:"https://test-videos.co.uk/vids/jellyfish/mp4/h264/360/Jellyfish_360_10s_2MB.mp4",user:"@حديقة_الصباح",caption:"لحظة هدوء وسط الزحمة 🌿 خدلك نفس عميق #هدوء",likes:3200,comments:64,c:"#06d6a0"}
 ];
 const fmt=n=>n>=1e6?(n/1e6).toFixed(1)+"م":n>=1000?(n/1000).toFixed(1).replace(".0","")+"ألف":String(n);
-const ico={
- heart:'<svg viewBox="0 0 24 24"><path d="M12 21s-8-5.3-8-11a4.7 4.7 0 0 1 8-3.4A4.7 4.7 0 0 1 20 10c0 5.7-8 11-8 11z"/></svg>',
- comment:'<svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>',
- share:'<svg viewBox="0 0 24 24"><path d="M14 3v5C7 9 3 13 2 20c2.5-3.5 6-5 12-5v5l8-8.5z"/></svg>',
- on:'<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
- off:'<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg>',
- play:'<svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>'
-};
+const ico={heart:ICO.heart,comment:ICO.chat,share:ICO.send,save:ICO.save,on:ICO.volon,off:ICO.voloff,play:ICO.play};
 const feed=document.getElementById("feed"),toast=document.getElementById("toast");
 const $=id=>document.getElementById(id);
 let muted=true,panelOpen=false,clips=[];
@@ -84,13 +80,20 @@ function makeCard(v){
  el.innerHTML=`${media}
  <div class="shade"></div><div class="playicon">${ico.play}</div>
  <button class="mute" aria-label="الصوت">${muted?ico.off:ico.on}</button>
- <div class="side">
-  <div class="avwrap"><div class="avatar" data-u style="background:${v.c}">${esc(initial(v.user))}</div><button class="fplus" aria-label="متابعة">+</button></div>
-  <button class="like${v.state.liked?" on":""}">${ico.heart}<span>${fmt(v.state.likes)}</span></button>
-  <button class="cm">${ico.comment}<span>${fmt(v.comments)}</span></button>
-  <button class="sh">${ico.share}<span>شارك</span></button>
+ <div class="dock">
+  <div class="who">
+   <div class="avatar" data-u style="background:${v.c}">${esc(initial(v.user))}</div>
+   <b data-u>${esc(v.user)}</b>
+   <button class="fplus" aria-label="متابعة">متابعة</button>
+  </div>
+  <p class="cap">${esc(v.caption)}</p>
+  <div class="acts">
+   <button class="act like${v.state.liked?" on":""}" aria-label="إعجاب">${ico.heart}<span>${fmt(v.state.likes)}</span></button>
+   <button class="act cm" aria-label="تعليقات">${ico.comment}<span>${fmt(v.comments)}</span></button>
+   <button class="act sv${savedSet.has(v.id)?" on":""}" aria-label="حفظ">${ico.save}</button>
+   <button class="act sh" aria-label="مشاركة">${ico.share}</button>
+  </div>
  </div>
- <div class="info"><b data-u>${esc(v.user)}</b><p>${esc(v.caption)}</p></div>
  <div class="bar"><i></i></div>`;
  v.el=el;el._v=v;
  const vid=v.yt?ytStub(el,v.yt):el.querySelector("video"),mb=el.querySelector(".mute"),lk=el.querySelector(".like"),bar=el.querySelector(".bar i");
@@ -102,9 +105,10 @@ function makeCard(v){
   if(e.target.closest("button"))return;
   if(vid.paused){vid.play().catch(()=>{});el.classList.remove("paused")}else{vid.pause();el.classList.add("paused")}
  });
- mb.onclick=()=>{muted=!muted;document.querySelectorAll(".card").forEach(c=>{c._vid.muted=muted;c.querySelector(".mute").innerHTML=muted?ico.off:ico.on});if(!muted)say("الصوت شغال 🔊")};
+ mb.onclick=()=>{muted=!muted;document.querySelectorAll(".card").forEach(c=>{c._vid.muted=muted;c.querySelector(".mute").innerHTML=muted?ico.off:ico.on});if(!muted)say("الصوت شغال")};
  lk.onclick=()=>toggleLike(v,lk);
  el.querySelector(".cm").onclick=()=>openComments(v);
+ el.querySelector(".sv").onclick=e=>{const b=e.currentTarget;if(savedSet.has(v.id)){savedSet.delete(v.id);b.classList.remove("on");say("اتشالت من المحفوظات")}else{savedSet.add(v.id);b.classList.add("on");say("اتحفظ")}try{localStorage.setItem("shorts_saved",JSON.stringify([...savedSet]))}catch(_){}};
  el.querySelector(".sh").onclick=async()=>{
   const d={title:"شورتس",text:v.caption,url:location.href};
   if(navigator.share){try{await navigator.share(d)}catch(e){}}
@@ -202,7 +206,7 @@ function openUser(h){
 }
 function thumbBtn(v,onclick){
  const b=document.createElement("button");
- b.innerHTML=v.yt?`<img src="${ytThumb(v.yt)}" alt=""><i class="ytb">▶</i>`:`<video src="${v.src}#t=0.1" muted playsinline preload="metadata"></video>`;
+ b.innerHTML=v.yt?`<img src="${ytThumb(v.yt)}" alt=""><i class="ytb">YouTube</i>`:`<video src="${v.src}#t=0.1" muted playsinline preload="metadata"></video>`;
  b.onclick=onclick;return b;
 }
 function renderUser(h){
@@ -211,7 +215,7 @@ function renderUser(h){
  const av=$("uav");av.style.background=own?own.c:colorFor(h);av.textContent=initial(h);
  $("uh").textContent=h;$("ustats").innerHTML=statsHTML(h);
  const fb=$("ufb"),me=isMe(h),fo=followSet.has(h);
- fb.hidden=me;fb.textContent=fo?"أنت بتتابعه ✓":"متابعة";fb.classList.toggle("on",fo);
+ fb.hidden=me;fb.textContent=fo?"بتتابعه":"متابعة";fb.classList.toggle("on",fo);
  const g=$("ugrid");g.innerHTML="";
  const list=clips.filter(v=>v.user===h);
  list.forEach(v=>g.appendChild(thumbBtn(v,()=>{if(tab!=="foryou")setTab("foryou");goTo(v,false)})));
@@ -475,5 +479,5 @@ async function onRecorded(){
  feed.scrollTo({top:0});setTimeout(playCurrent,80);
  say(clip.server?"تم النشر ✅ الفيديو بقى على السيرفر":"اتحفظ على جهازك، الرفع فشل — جرّب تاني");
 }
+paintIcons();
 boot();
-

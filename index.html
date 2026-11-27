@@ -3,25 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0a0b10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
 <title>شورتس</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-<header class="top">
-  <button class="tab" data-tab="following">متابَع</button>
-  <span class="sep">|</span>
-  <button class="tab active" data-tab="foryou">لك</button>
-</header>
+<header class="top"><div class="seg"><button class="tab" data-tab="following">المتابَعون</button><button class="tab active" data-tab="foryou">لك</button></div></header>
 <main id="feed" class="feed"></main>
-<div id="fempty" class="fempty" hidden>مش بتتابع حد لسه 👀<br><small>دوس على + اللي على صورة أي حساب في «لك» وهتظهر فيديوهاته هنا</small></div>
-<nav class="bottom">
-  <button data-nav="home" class="nav active"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg><span>الرئيسية</span></button>
-  <button data-nav="search" class="nav"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><span>بحث</span></button>
-  <button data-nav="plus" class="nav plus" aria-label="جديد"><i>+</i></button>
-  <button data-nav="notif" class="nav"><svg viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5-6.7V3a2 2 0 0 0-4 0v1.3A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg><span>الإشعارات</span></button>
-  <button data-nav="profile" class="nav"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-8 2-8 5v3h16v-3c0-3-4-5-8-5z"/></svg><span>بروفايل</span></button>
-</nav>
+<div id="fempty" class="fempty" hidden>لسه ما بتتابعش حد<br><small>دوس على + اللي على صورة أي حساب في «لك» وهتظهر فيديوهاته هنا</small></div>
+<nav class="bottom"><div class="dockbar">
+  <button data-nav="home" class="nav active" aria-label="الرئيسية"><i data-i="home"></i></button>
+  <button data-nav="search" class="nav" aria-label="بحث"><i data-i="search"></i></button>
+  <button data-nav="plus" class="nav plus" aria-label="جديد"><i data-i="plus"></i></button>
+  <button data-nav="notif" class="nav" aria-label="الإشعارات"><i data-i="bell"></i></button>
+  <button data-nav="profile" class="nav" aria-label="الحساب"><i data-i="user"></i></button>
+</div></nav>
 <section id="p-search" class="panel" hidden>
   <div class="ptitle">بحث</div>
   <input id="q" class="q" type="search" placeholder="ابحث باسم المستخدم أو الوصف" autocomplete="off">
@@ -30,10 +29,10 @@
 <section id="p-notif" class="panel" hidden>
   <div class="ptitle">الإشعارات</div>
   <div class="plist">
-   <div class="nt"><i style="background:#fe2c55">♥</i><p><b>@نور_الصحراء</b> أعجبه فيديوك<small>منذ ٥ دقائق</small></p></div>
-   <div class="nt"><i style="background:#3a86ff">👤</i><p><b>@بحر_وأمواج</b> بدأ بمتابعتك<small>منذ ساعة</small></p></div>
-   <div class="nt"><i style="background:#06d6a0">💬</i><p><b>@زهرة_القاهرة</b> علّق: تصوير جميل 👏<small>منذ ٣ ساعات</small></p></div>
-   <div class="nt"><i style="background:#8338ec">★</i><p><b>شورتس</b> أهلاً بك! صوّر أول فيديو من زر +<small>أمس</small></p></div>
+   <div class="nt"><i class="ni" data-i="heart"></i><p><b>@نور_الصحراء</b> أعجبه فيديوك<small>منذ ٥ دقائق</small></p></div>
+   <div class="nt"><i class="ni" data-i="user"></i><p><b>@بحر_وأمواج</b> بدأ بمتابعتك<small>منذ ساعة</small></p></div>
+   <div class="nt"><i class="ni" data-i="chat"></i><p><b>@زهرة_القاهرة</b> علّق: تصوير جميل 👏<small>منذ ٣ ساعات</small></p></div>
+   <div class="nt"><i class="ni" data-i="spark"></i><p><b>شورتس</b> أهلاً بك! صوّر أول فيديو من زر +<small>أمس</small></p></div>
   </div>
 </section>
 <section id="p-profile" class="panel" hidden>
@@ -43,7 +42,7 @@
   <div id="empty" class="empty">لسه ما صورتش أي فيديو 🎬<br>دوس على زر + وابدأ التصوير</div>
 </section>
 <section id="p-user" class="panel" hidden>
-  <button id="uback" class="uback">→ رجوع</button>
+  <button id="uback" class="uback"><i data-i="back"></i> رجوع</button>
   <div class="me"><div id="uav" class="avatar"></div><b id="uh"></b><div class="stats" id="ustats"></div><button id="ufb" class="btn fb">متابعة</button></div>
   <div id="ugrid" class="grid"></div>
   <div id="uempty" class="empty">ما فيش فيديوهات هنا</div>
@@ -52,8 +51,8 @@
   <div class="shbox">
    <div id="shmenu">
     <div class="ptitle">إضافة فيديو</div>
-    <button id="shcam" class="shopt"><i>🎥</i><span>صوّر فيديو<small>سجّل بالكاميرا وارفعه</small></span></button>
-    <button id="shytbtn" class="shopt"><i>▶️</i><span>أضف من يوتيوب<small>الصق رابط شورت أو فيديو</small></span></button>
+    <button id="shcam" class="shopt"><i class="si" data-i="video"></i><span>صوّر فيديو<small>سجّل بالكاميرا وارفعه</small></span></button>
+    <button id="shytbtn" class="shopt"><i class="si" data-i="yt"></i><span>أضف من يوتيوب<small>الصق رابط شورت أو فيديو</small></span></button>
     <button id="shcancel" class="btn shc">إلغاء</button>
    </div>
    <div id="shyt" hidden>
@@ -68,8 +67,8 @@
 <section id="cam" class="cam" hidden>
   <video id="camv" autoplay muted playsinline></video>
   <div id="camerr" class="camerr" hidden><p id="camerrt"></p><button id="camok" class="btn">رجوع</button></div>
-  <button id="camx" class="cbtn cx" aria-label="إغلاق">✕</button>
-  <button id="camflip" class="cbtn cf" aria-label="قلب الكاميرا"><svg viewBox="0 0 24 24"><path d="M12 5V2L8 6l4 4V7a5 5 0 0 1 4.6 7h2.1A7 7 0 0 0 12 5zm-4.6 5H5.3A7 7 0 0 0 12 19v3l4-4-4-4v3a5 5 0 0 1-4.6-7z"/></svg></button>
+  <button id="camx" class="cbtn cx" aria-label="إغلاق"><i data-i="x"></i></button>
+  <button id="camflip" class="cbtn cf" aria-label="قلب الكاميرا"><i data-i="flip"></i></button>
   <div id="rectime" class="rectime" hidden>0:00</div>
   <div class="camfoot">
    <input id="capt" class="capt" placeholder="اكتب وصفًا للفيديو (اختياري)" maxlength="120">
@@ -78,7 +77,7 @@
 </section>
 <section id="csheet" class="sheet" hidden>
   <div class="shbox cbox">
-   <div class="chead"><div class="ptitle" id="ctitle">التعليقات</div><button id="cclose" class="cclose" aria-label="إغلاق">✕</button></div>
+   <div class="chead"><div class="ptitle" id="ctitle">التعليقات</div><button id="cclose" class="cclose" aria-label="إغلاق"><i data-i="x"></i></button></div>
    <div id="clist" class="clist"></div>
    <form id="cform" class="cform"><input id="cin" class="q" maxlength="300" placeholder="اكتب تعليقًا…" autocomplete="off"><button id="csend" class="btn" type="submit">نشر</button></form>
   </div>
@@ -86,7 +85,7 @@
 <div id="toast" class="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="config.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
 
