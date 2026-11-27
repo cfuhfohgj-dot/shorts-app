@@ -25,7 +25,7 @@ const SB_URL=window.SUPABASE_URL||"",SB_KEY=window.SUPABASE_ANON_KEY||"";
 let sb=null;
 try{if(window.supabase&&SB_URL&&SB_KEY)sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false}})}catch(e){console.warn("supabase init failed",e)}
 const DEVICE=(()=>{try{let d=localStorage.getItem("shorts_device");if(!d){d="d_"+Math.random().toString(36).slice(2,10)+Date.now().toString(36);localStorage.setItem("shorts_device",d)}return d}catch(e){return "d_anon"}})();
-const PALETTE=["#fe2c55","#3a86ff","#06d6a0","#8338ec","#ff006e","#f4a261","#2ec4b6","#e8a33d"];
+const PALETTE=["#c8ff4d","#8b7bff","#5eead4","#ffb86b","#7dd3fc","#f9a8d4","#fde68a","#a7f3d0"];
 const colorFor=s=>PALETTE[Math.abs([...String(s)].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))%PALETTE.length];
 const MY_HANDLE=(()=>{try{let h=localStorage.getItem("shorts_handle");if(!h){h="@user_"+DEVICE.slice(2,6);localStorage.setItem("shorts_handle",h)}return h}catch(e){return "@user_anon"}})();
 const OLD_HANDLE="@\u0623\u0646\u062a";
@@ -468,7 +468,7 @@ async function onRecorded(){
    const up=await sb.storage.from("videos").upload(path,blob,{contentType:type||"video/webm",upsert:false,cacheControl:"3600"});
    if(up.error)throw up.error;
    const pub=sb.storage.from("videos").getPublicUrl(path);
-   const ins=await sb.from("videos").insert({handle:MY_HANDLE,caption,video_url:pub.data.publicUrl,seed:false,color:"#fe2c55",device_id:DEVICE}).select().single();
+   const ins=await sb.from("videos").insert({handle:MY_HANDLE,caption,video_url:pub.data.publicUrl,seed:false,color:"#c8ff4d",device_id:DEVICE}).select().single();
    if(ins.error)throw ins.error;
    localRec.uploaded=true;await dbPut(localRec);
    clip=rowToClip(ins.data);clip.mine=true;

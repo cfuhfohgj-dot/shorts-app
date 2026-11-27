@@ -226,3 +226,7 @@ body.pan .top{display:none}
 .q{border-radius:14px}
 @media(min-width:700px){.dockbar{width:380px}.dock{inset-inline:calc(50% - 228px)}.bar{inset-inline:calc(50% - 214px)}}
 @media(prefers-reduced-motion:reduce){.panel{animation:none}}
+
+.yt iframe{top:-70px!important;height:calc(100% + 140px)!important}
+.yt{overflow:hidden}
+.yt::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(9,10,16,.9),transparent 14%)}
