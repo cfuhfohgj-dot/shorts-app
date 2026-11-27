@@ -27,9 +27,11 @@ const io=new IntersectionObserver(es=>{es.forEach(en=>{
  const c=en.target,vid=c.querySelector("video");
  if(en.isIntersecting&&en.intersectionRatio>=.6&&!panelOpen){
   vid.muted=muted;c.classList.remove("paused");
-  vid.play().catch(()=>{vid.muted=true;vid.play().catch(()=>{})});
+  if(!c.classList.contains("cur")){c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter");c.classList.add("cur")}
+  clearTimeout(c._pt);
+  c._pt=setTimeout(()=>{if(c.classList.contains("cur")&&!panelOpen)vid.play().catch(()=>{vid.muted=true;vid.play().catch(()=>{})})},matchMedia("(prefers-reduced-motion: reduce)").matches?0:140);
   const n=c.nextElementSibling;if(n)n.querySelector("video").preload="auto";
- }else{vid.pause();if(en.intersectionRatio<.2)vid.currentTime=0}
+ }else{clearTimeout(c._pt);if(en.intersectionRatio<.6)c.classList.remove("cur");vid.pause();if(en.intersectionRatio<.2){vid.currentTime=0;c.classList.remove("enter")}}
 })},{root:feed,threshold:[0,.2,.6,.9]});
 function makeCard(v){
  const el=document.createElement("section");el.className="card";
