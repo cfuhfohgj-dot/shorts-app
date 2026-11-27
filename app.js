@@ -23,6 +23,19 @@ let muted=true,panelOpen=false,clips=[];
 const mine=[];
 function say(t){toast.textContent=t;toast.classList.add("show");clearTimeout(say.t);say.t=setTimeout(()=>toast.classList.remove("show"),1800)}
 const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+/* ---------- backend (Supabase) ---------- */
+const SB_URL=window.SUPABASE_URL||"",SB_KEY=window.SUPABASE_ANON_KEY||"";
+let sb=null;
+try{if(window.supabase&&SB_URL&&SB_KEY)sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false}})}catch(e){console.warn("supabase init failed",e)}
+const DEVICE=(()=>{try{let d=localStorage.getItem("shorts_device");if(!d){d="d_"+Math.random().toString(36).slice(2,10)+Date.now().toString(36);localStorage.setItem("shorts_device",d)}return d}catch(e){return "d_anon"}})();
+const PALETTE=["#fe2c55","#3a86ff","#06d6a0","#8338ec","#ff006e","#f4a261","#2ec4b6","#e8a33d"];
+const colorFor=s=>PALETTE[Math.abs([...String(s)].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))%PALETTE.length];
+const likedSet=new Set();
+function rowToClip(r){
+ return{id:r.id,src:r.video_url,user:r.handle,caption:r.caption||"",likes:(r.base_likes||0)+(r.likes_count||0),base:r.base_likes||0,comments:r.comments_count||0,c:r.color||colorFor(r.handle),server:true,device:r.device_id||null,mine:!!r.device_id&&r.device_id===DEVICE,ts:Date.parse(r.created_at)||0};
+}
+
 const io=new IntersectionObserver(es=>{es.forEach(en=>{
  const c=en.target,vid=c.querySelector("video");
  if(en.isIntersecting&&en.intersectionRatio>=.6&&!panelOpen){
@@ -35,13 +48,13 @@ const io=new IntersectionObserver(es=>{es.forEach(en=>{
 })},{root:feed,threshold:[0,.2,.6,.9]});
 function makeCard(v){
  const el=document.createElement("section");el.className="card";
- v.state=v.state||{liked:false,likes:v.likes};
+ v.state=v.state||{liked:likedSet.has(v.id),likes:v.likes};
  el.innerHTML=`<video src="${v.src}" muted loop playsinline webkit-playsinline preload="auto"></video>
  <div class="shade"></div><div class="playicon">${ico.play}</div>
  <button class="mute" aria-label="الصوت">${muted?ico.off:ico.on}</button>
  <div class="side">
   <div class="avatar" style="background:${v.c}">${esc(v.user[1])}</div>
-  <button class="like">${ico.heart}<span>${fmt(v.state.likes)}</span></button>
+  <button class="like${v.state.liked?" on":""}">${ico.heart}<span>${fmt(v.state.likes)}</span></button>
   <button class="cm">${ico.comment}<span>${fmt(v.comments)}</span></button>
   <button class="sh">${ico.share}<span>شارك</span></button>
  </div>
@@ -55,7 +68,7 @@ function makeCard(v){
   if(vid.paused){vid.play().catch(()=>{});el.classList.remove("paused")}else{vid.pause();el.classList.add("paused")}
  });
  mb.onclick=()=>{muted=!muted;document.querySelectorAll(".card").forEach(c=>{c.querySelector("video").muted=muted;c.querySelector(".mute").innerHTML=muted?ico.off:ico.on});if(!muted)say("الصوت شغال 🔊")};
- lk.onclick=()=>{const s=v.state;s.liked=!s.liked;s.likes+=s.liked?1:-1;lk.classList.toggle("on",s.liked);lk.querySelector("span").textContent=fmt(s.likes)};
+ lk.onclick=()=>toggleLike(v,lk);
  el.querySelector(".cm").onclick=()=>say("التعليقات قريبًا 💬");
  el.querySelector(".sh").onclick=async()=>{
   const d={title:"شورتس",text:v.caption,url:location.href};
@@ -66,7 +79,37 @@ function makeCard(v){
  io.observe(el);
  return el;
 }
-SAMPLES.forEach(v=>{clips.push(v);feed.appendChild(makeCard(v))});
+async function toggleLike(v,lk){
+ const s=v.state,want=!s.liked;
+ const paint=()=>{lk.classList.toggle("on",s.liked);lk.querySelector("span").textContent=fmt(s.likes)};
+ s.liked=want;s.likes+=want?1:-1;paint();
+ if(want)likedSet.add(v.id);else likedSet.delete(v.id);
+ v._localUntil=Date.now()+3000;
+ if(!v.server||!sb)return;
+ try{
+  if(want){
+   const r=await sb.from("likes").insert({video_id:v.id,device_id:DEVICE});
+   if(r.error&&String(r.error.code||"")!=="23505")throw r.error;
+  }else{
+   const r=await sb.from("likes").delete().eq("video_id",v.id).eq("device_id",DEVICE);
+   if(r.error)throw r.error;
+  }
+ }catch(e){
+  console.warn("like failed",e);
+  s.liked=!want;s.likes+=want?-1:1;paint();
+  if(s.liked)likedSet.add(v.id);else likedSet.delete(v.id);
+  say("الإعجاب مش اتحفظ، جرّب تاني");
+ }
+}
+function addClip(v,top){
+ v.state={liked:likedSet.has(v.id),likes:v.likes};
+ const el=makeCard(v);
+ if(top){feed.insertBefore(el,feed.firstChild);clips.unshift(v)}else{feed.appendChild(el);clips.push(v)}
+ refreshMine();
+ return v;
+}
+function refreshMine(){mine.length=0;clips.filter(v=>v.mine).sort((a,b)=>(b.ts||0)-(a.ts||0)).forEach(v=>mine.push(v))}
+function useFallback(){SAMPLES.forEach(v=>addClip({src:v.src,user:v.user,caption:v.caption,likes:v.likes,comments:v.comments,c:v.c,ts:0,server:false}))}
 function goTo(v,smooth){closePanels();requestAnimationFrame(()=>{feed.scrollTo({top:v.el.offsetTop,behavior:smooth?"smooth":"auto"});setTimeout(playCurrent,smooth?500:60)})}
 function playCurrent(){if(panelOpen)return;const i=Math.round(feed.scrollTop/feed.clientHeight);const c=feed.children[i];if(c){const vid=c.querySelector("video");vid.muted=muted;vid.play().catch(()=>{vid.muted=true;vid.play().catch(()=>{})})}}
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
@@ -85,13 +128,38 @@ function db(){if(dbp)return dbp;dbp=new Promise((res,rej)=>{
 async function dbPut(rec){try{const d=await db();return new Promise((res,rej)=>{const t=d.transaction("clips","readwrite");t.objectStore("clips").put(rec);t.oncomplete=res;t.onerror=()=>rej(t.error)})}catch(e){return false}}
 async function dbAll(){try{const d=await db();return await new Promise((res,rej)=>{const q=d.transaction("clips").objectStore("clips").getAll();q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}catch(e){return[]}}
 async function dbDel(id){try{const d=await db();d.transaction("clips","readwrite").objectStore("clips").delete(id)}catch(e){}}
-function addMine(rec,toTop){
- const v={id:rec.id,src:URL.createObjectURL(rec.blob),user:"@أنت",caption:rec.caption||"فيديو جديد 🎬",likes:0,comments:0,c:"#fe2c55",mine:true,ts:rec.ts};
- mine.unshift(v);clips.unshift(v);
- const el=makeCard(v);feed.insertBefore(el,feed.firstChild);
- return v;
+
+/* ---------- boot: feed from the server ---------- */
+async function boot(){
+ let rows=[];
+ if(sb){
+  try{
+   const r=await sb.from("videos").select("*").order("created_at",{ascending:true});
+   if(r.error)console.warn("videos load failed",r.error);else rows=r.data||[];
+   const lk=await sb.from("likes").select("video_id").eq("device_id",DEVICE);
+   if(!lk.error)(lk.data||[]).forEach(x=>likedSet.add(x.video_id));
+  }catch(e){console.warn("backend unreachable",e)}
+ }
+ if(rows.length){rows.map(rowToClip).forEach(c=>addClip(c,false))}else{useFallback()}
+ // clips recorded on this device that never reached the server
+ const all=(await dbAll()).sort((a,b)=>a.ts-b.ts);
+ all.filter(r=>!r.uploaded).forEach(r=>{
+  addClip({id:r.id,src:URL.createObjectURL(r.blob),user:"@أنت",caption:r.caption||"فيديو جديد 🎬",likes:0,comments:0,c:"#fe2c55",mine:true,ts:r.ts,server:false},true);
+ });
+ refreshMine();renderProfile();
+ if(sb){
+  try{
+   sb.channel("videos-live").on("postgres_changes",{event:"UPDATE",schema:"public",table:"videos"},p=>{
+    const row=p.new||{};const v=clips.find(c=>c.id===row.id);
+    if(!v||!v.server||!v.state)return;
+    if(v._localUntil&&Date.now()<v._localUntil)return;
+    const n=(row.base_likes||0)+(row.likes_count||0);
+    v.state.likes=n;v.likes=n;
+    const sp=v.el&&v.el.querySelector(".like span");if(sp)sp.textContent=fmt(n);
+   }).subscribe();
+  }catch(e){}
+ }
 }
-(async()=>{const all=(await dbAll()).sort((a,b)=>a.ts-b.ts);all.forEach(r=>addMine(r));renderProfile()})();
 
 /* ---------- panels ---------- */
 const panels={search:$("p-search"),notif:$("p-notif"),profile:$("p-profile")};
@@ -178,10 +246,29 @@ async function onRecorded(){
  const type=(rec&&rec.mimeType)||(chunks[0]&&chunks[0].type)||"video/webm";
  const blob=new Blob(chunks,{type});
  if(Date.now()-t0<600||blob.size<500){say("الفيديو قصير قوي، جرّب تاني");return}
- const r={id:"c"+Date.now(),blob,caption:$("capt").value.trim()||"فيديو جديد 🎬",ts:Date.now()};
- const ok=await dbPut(r);
- const v=addMine(r);renderProfile();
+ const caption=$("capt").value.trim()||"فيديو جديد 🎬";
+ const id="c"+Date.now();
+ const localRec={id,blob,caption,ts:Date.now(),uploaded:false};
+ const ok=await dbPut(localRec);
  stopStream();cam.hidden=true;panelOpen=false;
+ let clip=null;
+ if(sb){
+  say("جاري رفع الفيديو… ⬆️");
+  try{
+   const ext=type.indexOf("mp4")>=0?"mp4":"webm";
+   const path=DEVICE+"/"+id+"."+ext;
+   const up=await sb.storage.from("videos").upload(path,blob,{contentType:type||"video/webm",upsert:false,cacheControl:"3600"});
+   if(up.error)throw up.error;
+   const pub=sb.storage.from("videos").getPublicUrl(path);
+   const ins=await sb.from("videos").insert({handle:"@أنت",caption,video_url:pub.data.publicUrl,seed:false,color:"#fe2c55",device_id:DEVICE}).select().single();
+   if(ins.error)throw ins.error;
+   localRec.uploaded=true;await dbPut(localRec);
+   clip=rowToClip(ins.data);clip.mine=true;
+  }catch(e){console.warn("upload failed",e)}
+ }
+ if(!clip)clip={id,src:URL.createObjectURL(blob),user:"@أنت",caption,likes:0,comments:0,c:"#fe2c55",mine:true,ts:Date.now(),server:false};
+ addClip(clip,true);renderProfile();
  feed.scrollTo({top:0});setTimeout(playCurrent,80);
- say(ok===false?"اتضاف للفيد (مش هيتحفظ بعد الريفريش)":"تم نشر الفيديو ✅");
+ say(clip.server?"تم النشر ✅ الفيديو بقى على السيرفر":"اتحفظ على جهازك، الرفع فشل — جرّب تاني");
 }
+boot();
