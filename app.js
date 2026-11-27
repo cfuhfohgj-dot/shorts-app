@@ -33,7 +33,7 @@ const PALETTE=["#fe2c55","#3a86ff","#06d6a0","#8338ec","#ff006e","#f4a261","#2ec
 const colorFor=s=>PALETTE[Math.abs([...String(s)].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))%PALETTE.length];
 const likedSet=new Set();
 function rowToClip(r){
- return{id:r.id,src:r.video_url,user:r.handle,caption:r.caption||"",likes:(r.base_likes||0)+(r.likes_count||0),base:r.base_likes||0,comments:r.comments_count||0,c:r.color||colorFor(r.handle),server:true,device:r.device_id||null,mine:!!r.device_id&&r.device_id===DEVICE,ts:Date.parse(r.created_at)||0};
+ return{id:r.id,src:r.video_url,user:r.handle,caption:r.caption||"",likes:(r.base_likes||0)+(r.likes_count||0),base:r.base_likes||0,comments:r.comments_count||0,c:r.color||colorFor(r.handle),server:true,seed:!!r.seed,device:r.device_id||null,mine:!!r.device_id&&r.device_id===DEVICE,ts:Date.parse(r.created_at)||0};
 }
 
 const io=new IntersectionObserver(es=>{es.forEach(en=>{
@@ -140,7 +140,11 @@ async function boot(){
    if(!lk.error)(lk.data||[]).forEach(x=>likedSet.add(x.video_id));
   }catch(e){console.warn("backend unreachable",e)}
  }
- if(rows.length){rows.map(rowToClip).forEach(c=>addClip(c,false))}else{useFallback()}
+ if(rows.length){
+  const ups=rows.filter(r=>!r.seed).sort((a,b)=>(Date.parse(b.created_at)||0)-(Date.parse(a.created_at)||0));
+  const seeds=rows.filter(r=>r.seed);
+  ups.concat(seeds).map(rowToClip).forEach(c=>addClip(c,false));
+ }else{useFallback()}
  // clips recorded on this device that never reached the server
  const all=(await dbAll()).sort((a,b)=>a.ts-b.ts);
  all.filter(r=>!r.uploaded).forEach(r=>{
