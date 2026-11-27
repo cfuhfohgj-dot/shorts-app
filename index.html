@@ -14,6 +14,7 @@
   <button class="tab active" data-tab="foryou">لك</button>
 </header>
 <main id="feed" class="feed"></main>
+<div id="fempty" class="fempty" hidden>مش بتتابع حد لسه 👀<br><small>دوس على + اللي على صورة أي حساب في «لك» وهتظهر فيديوهاته هنا</small></div>
 <nav class="bottom">
   <button data-nav="home" class="nav active"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg><span>الرئيسية</span></button>
   <button data-nav="search" class="nav"><svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 5 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg><span>بحث</span></button>
@@ -37,9 +38,32 @@
 </section>
 <section id="p-profile" class="panel" hidden>
   <div class="ptitle">بروفايل</div>
-  <div class="me"><div class="avatar" style="background:#fe2c55">أ</div><b>@أنت</b><small id="mecount">٠ فيديو</small></div>
+  <div class="me"><div class="avatar" style="background:#fe2c55">أ</div><b id="meh">@أنت</b><div class="stats" id="mestats"></div><small id="mecount">٠ فيديو</small></div>
   <div id="grid" class="grid"></div>
   <div id="empty" class="empty">لسه ما صورتش أي فيديو 🎬<br>دوس على زر + وابدأ التصوير</div>
+</section>
+<section id="p-user" class="panel" hidden>
+  <button id="uback" class="uback">→ رجوع</button>
+  <div class="me"><div id="uav" class="avatar"></div><b id="uh"></b><div class="stats" id="ustats"></div><button id="ufb" class="btn fb">متابعة</button></div>
+  <div id="ugrid" class="grid"></div>
+  <div id="uempty" class="empty">ما فيش فيديوهات هنا</div>
+</section>
+<section id="sheet" class="sheet" hidden>
+  <div class="shbox">
+   <div id="shmenu">
+    <div class="ptitle">إضافة فيديو</div>
+    <button id="shcam" class="shopt"><i>🎥</i><span>صوّر فيديو<small>سجّل بالكاميرا وارفعه</small></span></button>
+    <button id="shytbtn" class="shopt"><i>▶️</i><span>أضف من يوتيوب<small>الصق رابط شورت أو فيديو</small></span></button>
+    <button id="shcancel" class="btn shc">إلغاء</button>
+   </div>
+   <div id="shyt" hidden>
+    <div class="ptitle">أضف من يوتيوب</div>
+    <input id="yturl" class="q" type="url" inputmode="url" dir="ltr" placeholder="https://youtube.com/shorts/..." autocomplete="off">
+    <input id="ytcap" class="q" style="margin-top:10px" placeholder="وصف (اختياري)" maxlength="120">
+    <p id="yterr" class="yterr"></p>
+    <div class="shrow"><button id="ytpost" class="btn">نشر</button><button id="ytback" class="btn">رجوع</button></div>
+   </div>
+  </div>
 </section>
 <section id="cam" class="cam" hidden>
   <video id="camv" autoplay muted playsinline></video>
