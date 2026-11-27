@@ -97,3 +97,10 @@ body.pan .top{display:none}
 .camerr{background:rgba(10,10,12,.55);-webkit-backdrop-filter:blur(26px);backdrop-filter:blur(26px);text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .btn{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);text-shadow:0 1px 3px rgba(0,0,0,.6)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.panel,.camerr{background:rgba(10,10,12,.92)}.top,.bottom{background:rgba(10,10,12,.85)}}
+
+/* ===== Feed motion ===== */
+@keyframes vin{from{opacity:.55;transform:scale(1.04)}to{opacity:1;transform:none}}
+@keyframes uin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card.enter video{animation:vin .26s cubic-bezier(.2,.7,.2,1) both}
+.card.enter .side,.card.enter .info{animation:uin .26s cubic-bezier(.2,.7,.2,1) .06s both}
+@media(prefers-reduced-motion:reduce){.card.enter video,.card.enter .side,.card.enter .info{animation:none}}
